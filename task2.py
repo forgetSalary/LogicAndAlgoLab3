@@ -2,6 +2,7 @@ import os
 from graph import *
 
 def task2():
+    os.system('cls')
     size = int(input("Введите количество вершин графа:"))
     os.system('cls')
 
@@ -23,7 +24,7 @@ def task2():
         otozhdestvVer(graph, ver1, ver2)
 
         print("H1:")
-        printGraph(graph)
+        printGraph2(graph)
 
     elif switch==2:
         ver1 = int(input("Введите вершину 1:"))

@@ -1,3 +1,4 @@
+import os
 from graph import randomMatrixGraph,printGraph,printGraph2
 
 def task1():

@@ -1,5 +1,11 @@
 import random
 
+def xor(a,b):
+    if a == b:
+        return 0
+    else:
+        return 1
+
 def randomMatrixGraph(n):
     rng=list(range(n))
 
@@ -47,8 +53,9 @@ def otozhdestvVer(graph,v,u):
 
     #делаем объединения ребер вершин u и v
     for i in range(gsize):
-        graph[v][i]=graph[v][i] or graph[u][i]
-        graph[i][v] = graph[v][i]
+        if i!=v:
+            graph[v][i]=graph[v][i] or graph[u][i]
+            graph[i][v] = graph[v][i]
 
     #удаляем ненужные ребра
     for i in range(gsize):
@@ -77,3 +84,68 @@ def rasshepVer(graph,v):
     for i in range(gsize):
         graph[i].append(graph[v][i])
 
+def obedin(graph1,graph2):
+    gsize1 = len(graph1)
+    gsize2 = len(graph2)
+
+    gsize= min(gsize1,gsize2)
+
+    if gsize==gsize1:
+        oldgraph = graph1
+        newgraph = graph2
+    else:
+        oldgraph = graph2
+        newgraph = graph1
+
+    rng=list(range(gsize))
+    for i in rng:
+        for j in rng:
+            newgraph[i][j] = newgraph[i][j] or oldgraph[i][j]
+            newgraph[j][i] = newgraph[i][j]
+        del rng[0]
+
+    return newgraph
+
+def peresechenie(graph1,graph2):
+    gsize1 = len(graph1)
+    gsize2 = len(graph2)
+
+    gsize= min(gsize1,gsize2)
+
+    if gsize==gsize1:
+        oldgraph = graph1
+        newgraph = graph2
+    else:
+        oldgraph = graph2
+        newgraph = graph1
+
+    rng=list(range(gsize))
+    for i in rng:
+        for j in rng:
+            newgraph[i][j] = newgraph[i][j] and oldgraph[i][j]
+            newgraph[j][i] = newgraph[i][j]
+        del rng[0]
+
+    return newgraph
+
+def xorGraphs(graph1,graph2):
+    gsize1 = len(graph1)
+    gsize2 = len(graph2)
+
+    gsize= min(gsize1,gsize2)
+
+    if gsize==gsize1:
+        oldgraph = graph1
+        newgraph = graph2
+    else:
+        oldgraph = graph2
+        newgraph = graph1
+
+    rng=list(range(gsize))
+    for i in rng:
+        for j in rng:
+            newgraph[i][j] = xor(newgraph[i][j],oldgraph[i][j])
+            newgraph[j][i] = newgraph[i][j]
+        del rng[0]
+
+    return newgraph
