@@ -15,32 +15,35 @@ def task2():
 
     graph = randomMatrixGraph(size)
     print("G1:")
-    printGraph2(graph)
+    printGraph(graph)
 
     if switch==1:
+        print("Отождествление вершин")
         ver1 = int(input("Введите вершину 1:"))
         ver2 = int(input("Введите вершину 2:"))
 
         otozhdestvVer(graph, ver1, ver2)
 
         print("H1:")
-        printGraph2(graph)
+        printGraph(graph)
 
     elif switch==2:
+        print("Стягивание ребра")
         ver1 = int(input("Введите вершину 1:"))
         ver2 = int(input("Введите вершину 2:"))
 
         if (styanRebro(graph, ver1, ver2)):
             print("H1:")
-            printGraph2(graph)
+            printGraph(graph)
         else:
             print("Вершины не смежные")
 
     elif switch==3:
+        print("Расщепления вершины")
         ver = int(input("Введите вершину:"))
 
         rasshepVer(graph,ver)
 
         print("H1:")
-        printGraph2(graph)
+        printGraph(graph)
 

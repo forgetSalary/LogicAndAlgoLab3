@@ -1,14 +1,17 @@
 import os
-from graph import randomMatrixGraph,printGraph,printGraph2
+from graph import randomMatrixGraph,printGraph
 
 def task1():
-    size = int(input("Введите количество вершин графа:"))
+    size1 = int(input("Введите количество вершин графа 1:"))
 
-    graph1 = randomMatrixGraph(size)
-    graph2 = randomMatrixGraph(size)
+    graph1 = randomMatrixGraph(size1)
 
     print("G1:")
-    printGraph2(graph1)
+    printGraph(graph1)
+
+    size2 = int(input("Введите количество вершин графа 1:"))
+
+    graph2 = randomMatrixGraph(size2)
 
     print("G2:")
     printGraph(graph2)

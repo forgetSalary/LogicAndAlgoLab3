@@ -37,14 +37,14 @@ def printGraph(graph):
         print('|',end='\n')
     print('', end='\n')
 
-def printGraph2(graph):
-    rng=range(len(graph))
-
-    for i in rng:
-        for j in rng:
-            print("%d,"%(graph[i][j]),end='')
-        print('',end='\n')
-    print('', end='\n')
+# def printGraph(graph):
+#     rng=range(len(graph))
+#
+#     for i in rng:
+#         for j in rng:
+#             print("%d,"%(graph[i][j]),end='')
+#         print('',end='\n')
+#     print('', end='\n')
 
 def otozhdestvVer(graph,v,u):
     gsize=len(graph)
@@ -57,7 +57,7 @@ def otozhdestvVer(graph,v,u):
             graph[v][i]=graph[v][i] or graph[u][i]
             graph[i][v] = graph[v][i]
 
-    #удаляем ненужные ребра
+    #удаляем вершину u
     for i in range(gsize):
         del graph[i][u]
 

@@ -5,7 +5,6 @@ def task3():
     os.system('cls')
 
     size1 = int(input("Введите количество вершин графа 1:"))
-    os.system('cls')
     size2 = int(input("Введите количество вершин графа 2:"))
     os.system('cls')
 
@@ -20,22 +19,22 @@ def task3():
     graph2 = randomMatrixGraph(size2)
 
     print("G1:")
-    printGraph2(graph1)
+    printGraph(graph1)
 
     print("G2:")
-    printGraph2(graph2)
+    printGraph(graph2)
 
     if switch == 1:
         newgraph=obedin(graph1,graph2)
         print("H1:")
-        printGraph2(newgraph)
+        printGraph(newgraph)
 
     elif switch == 2:
         newgraph = peresechenie(graph1, graph2)
         print("H1:")
-        printGraph2(newgraph)
+        printGraph(newgraph)
 
     elif switch == 3:
         newgraph = xorGraphs(graph1, graph2)
         print("H1:")
-        printGraph2(newgraph)
+        printGraph(newgraph)
