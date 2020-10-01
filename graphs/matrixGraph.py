@@ -110,6 +110,7 @@ def rasshepVer(graph,vrtx,divide):
         for i in range(gsize):
             graph.matrix[i].append(graph.matrix[v][i])
 
+
 def obedin(graph1,graph2):
     newVertexex = arrOr(graph1.vertexes,graph2.vertexes)
     newSize = len(newVertexex)

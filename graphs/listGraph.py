@@ -128,7 +128,7 @@ def otozhdestvVer_List(graph,vrtxDst,vrtxSrc):
     # удаляем ребро между Dst и Src, если оно есть
     vrtc_btw_dstsrc=findInList(dst_head, vrtxSrc)
     if (vrtc_btw_dstsrc):
-        findFirstParent(dst_head, vrtxSrc).next = None
+        findFirstParent(dst_head, vrtxSrc).next = vrtc_btw_dstsrc.next
 
     # добавляем ребра из Src в Dst, если в последнем их нет
     while(nextVertexOfSrc.next):
@@ -141,5 +141,16 @@ def otozhdestvVer_List(graph,vrtxDst,vrtxSrc):
     del graph.vertexes[vrtx_index_Srs]
     del graph.lists[vrtx_index_Srs]
 
+def styanRebro_List(graph,vrtxDst,vrtxSrc):
+    vrtx_index_Dst = graph.vertexes.index(vrtxDst)
+    vrtx_index_Srs = graph.vertexes.index(vrtxSrc)
 
+    dst_head = graph.lists[vrtx_index_Dst]
+    src_head = graph.lists[vrtx_index_Srs]
 
+    # проверка на смежность
+    if (findInList(dst_head, vrtxSrc) and (findInList(src_head, vrtxDst))):
+        otozhdestvVer_List(graph, vrtxDst, vrtxSrc)
+        return 1
+    else:
+        return 0
