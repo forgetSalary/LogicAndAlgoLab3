@@ -1,49 +1,41 @@
 import os
-from graph import *
+from graphs.matrixGraph import *
 
-def task2():
-    os.system('cls')
-    size = int(input("Введите количество вершин графа:"))
-    os.system('cls')
-
+def task2(graph):
     print("Выберети действие:\n"
           "1)Отождествление вершин\n"
           "2)Стягивание ребра\n"
           "3)Расщепления вершины")
-    switch=int(input())
+    switch = int(input())
     os.system('cls')
 
-    graph = randomMatrixGraph(size)
-    print("G1:")
-    printGraph(graph)
-
-    if switch==1:
+    if switch == 1:
         print("Отождествление вершин")
         ver1 = int(input("Введите вершину 1:"))
         ver2 = int(input("Введите вершину 2:"))
 
         otozhdestvVer(graph, ver1, ver2)
 
-        print("H1:")
-        printGraph(graph)
+        print("Новый G1:")
+        printMatrixGraph(graph)
 
-    elif switch==2:
+    elif switch == 2:
         print("Стягивание ребра")
         ver1 = int(input("Введите вершину 1:"))
         ver2 = int(input("Введите вершину 2:"))
 
         if (styanRebro(graph, ver1, ver2)):
-            print("H1:")
-            printGraph(graph)
+            print("Новый G1:")
+            printMatrixGraph(graph)
         else:
             print("Вершины не смежные")
 
-    elif switch==3:
+    elif switch == 3:
         print("Расщепления вершины")
         ver = int(input("Введите вершину:"))
 
-        rasshepVer(graph,ver)
+        rasshepVer(graph, ver)
 
-        print("H1:")
-        printGraph(graph)
+        print("Новый G1:")
+        printMatrixGraph(graph)
 
