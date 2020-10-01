@@ -1,10 +1,10 @@
 def printListGraph(graph):
-    size = len(graph)
+    size = len(graph.vertexes)
 
     nextList, nextVertex, = None, None
 
     for i in range(size):
-        nextList = graph[i]
+        nextList = graph.lists[i]
 
         nextVertex = nextList
 
@@ -13,3 +13,5 @@ def printListGraph(graph):
             nextVertex = nextVertex.next
 
         print("|{:3d}|".format(nextVertex.vertex))
+
+    print("")

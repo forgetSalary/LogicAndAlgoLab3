@@ -80,10 +80,10 @@ def rasshepVer(graph,vrtx,divide):
     gsize = len(graph.matrix)
     v = graph.vertexes.index(vrtx)
 
-    graph.vertexes.append(graph.names[-1] + 1)
+    graph.vertexes.append(graph.vertexes[-1] + 1)
 
     if (divide):
-        q = graph[v].count(1)//2
+        q = graph.matrix[v].count(1)//2
 
         new_vertx = [0 for i in range(gsize)]
         graph.matrix.append(new_vertx)
@@ -108,7 +108,7 @@ def rasshepVer(graph,vrtx,divide):
         graph.matrix.append(new_vertx)
 
         for i in range(gsize):
-            graph.matrix[i].append(graph[v][i])
+            graph.matrix[i].append(graph.matrix[v][i])
 
 def obedin(graph1,graph2):
     newVertexex = arrOr(graph1.vertexes,graph2.vertexes)
