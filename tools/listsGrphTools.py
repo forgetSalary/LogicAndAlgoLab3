@@ -14,4 +14,4 @@ def printListGraph(graph):
 
         print("|{:3d}|".format(nextVertex.vertex))
 
-    print("")
+    print("\n")

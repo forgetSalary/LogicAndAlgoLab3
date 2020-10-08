@@ -1,4 +1,6 @@
 from tools.listsGrphTools import *
+from tools.mtrxGrphTools import arrOr, arrAnd
+
 
 class Node(object):
     def __init__(self):
@@ -76,20 +78,27 @@ def findFirstParent(vlist,child):
 
     return parent
 
+
+#directed
+def removeVertx_List_drct(list, vrtx):
+    nextVertex, vrtxForClear, parent = None, None, None
+
+    nextVertex = list.next
+    while (nextVertex):
+        found = findFirstParent(list, vrtx)
+
+        if found:
+            found.next = found.next.next
+            break
+        else:
+            nextVertex = nextVertex.next
+
+
+# undirected
 def removeVertx_List(graph, vrtx):
     v=graph.vertexes.index(vrtx)
 
-    nextVertex, vrtxForClear, parent = None, None, None
-
-    nextVertex = graph.lists[v].next
-    while (nextVertex):
-        vrtxForClear = graph.vertexes.index(nextVertex.vertex)
-
-        parent = findFirstParent(graph.lists[vrtxForClear], vrtx)
-
-        parent.next = parent.next.next
-
-        nextVertex = nextVertex.next
+    removeVertx_List_drct(graph.lists[v],vrtx)
 
     del graph.lists[v]
     del graph.vertexes[v]
@@ -154,3 +163,130 @@ def styanRebro_List(graph,vrtxDst,vrtxSrc):
         return 1
     else:
         return 0
+
+def obedin_List(graph1, graph2):
+    newVertexes=arrOr(graph1.vertexes, graph2.vertexes)
+
+    newSize =  len(newVertexes)
+
+    newLists = [Node() for i in range(newSize)]
+    for i in range(newSize):
+        newLists[i].vertex = newVertexes[i]
+
+    newGraph = listGraph(newLists,newVertexes)
+
+    nextVrtx,found = None, None
+
+    for i in range(newSize):
+        newVrtx1 = newGraph.vertexes[i]
+
+        if newVrtx1 in graph1.vertexes:
+            v1 = graph1.vertexes.index(newVrtx1)
+
+            newGraph.lists[i].next = graph1.lists[v1].next
+
+            if newVrtx1 in graph2.vertexes:
+                v2 = graph2.vertexes.index(newVrtx1)
+
+                nextVrtx = graph2.lists[v2]
+
+                while(nextVrtx):
+                    found=findInList(newGraph.lists[i], nextVrtx.vertex)
+
+                    if (not found):
+                        newGraph.lists[i].vrtxappend(nextVrtx.vertex)
+
+                    nextVrtx = nextVrtx.next
+
+        else:
+            v2 = graph2.vertexes.index(newVrtx1)
+            newGraph.lists[i].next = graph2.lists[v2].next
+
+    return newGraph
+
+def peresechenie_List(graph1, graph2):
+    newVertexes = arrAnd(graph1.vertexes, graph2.vertexes)
+
+    newSize = len(newVertexes)
+
+    newLists = [Node() for i in range(newSize)]
+    for i in range(newSize):
+        newLists[i].vertex = newVertexes[i]
+
+    newGraph = listGraph(newLists, newVertexes)
+
+    nextVrtx, found = None, None
+
+    for i in range(newSize):
+        newVrtx1 = newGraph.vertexes[i]
+
+        v1 = graph1.vertexes.index(newVrtx1)
+        v2 = graph2.vertexes.index(newVrtx1)
+
+        nextVrtx = graph1.lists[v1].next
+
+        while (nextVrtx):
+            found = findInList(graph2.lists[v2], nextVrtx.vertex)
+
+            if (found):
+                newGraph.lists[i].vrtxappend(nextVrtx.vertex)
+
+            nextVrtx = nextVrtx.next
+
+    return newGraph
+
+
+def koltsevaya_summa_List(graph1, graph2):
+    newVertexes = arrOr(graph1.vertexes, graph2.vertexes)
+
+    newSize = len(newVertexes)
+
+    newLists = [Node() for i in range(newSize)]
+    for i in range(newSize):
+        newLists[i].vertex = newVertexes[i]
+
+    newGraph = listGraph(newLists, newVertexes)
+
+    nextVrtx, found = None, None
+
+    forRemove = []
+
+    for i in range(newSize):
+        newVrtx1 = newGraph.vertexes[i]
+
+        if newVrtx1 in graph1.vertexes and newVrtx1 in graph2.vertexes:
+            v1 = graph1.vertexes.index(newVrtx1)
+            v2 = graph2.vertexes.index(newVrtx1)
+
+            newGraph.lists[i].next = graph1.lists[v1].next
+
+            nextVrtx = graph2.lists[v2].next
+
+            while (nextVrtx):
+                found = findInList(newGraph.lists[i], nextVrtx.vertex)
+
+                if (not found):
+                    newGraph.lists[i].vrtxappend(nextVrtx.vertex)
+                else:
+                    removeVertx_List_drct(newGraph.lists[i],nextVrtx.vertex)
+
+                nextVrtx = nextVrtx.next
+
+
+        elif newVrtx1 not in graph2.vertexes:
+            v1 = graph1.vertexes.index(newVrtx1)
+            newGraph.lists[i].next = graph1.lists[v1].next
+
+        else:
+            v2 = graph2.vertexes.index(newVrtx1)
+            newGraph.lists[i].next = graph2.lists[v2].next
+
+        if not newGraph.lists[i].next:
+            forRemove.append(i)
+
+    # удаляем изолимрованные вершины
+    for i in forRemove:
+        del newGraph.lists[i]
+        del newGraph.vertexes[i]
+
+    return newGraph

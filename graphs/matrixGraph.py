@@ -110,7 +110,6 @@ def rasshepVer(graph,vrtx,divide):
         for i in range(gsize):
             graph.matrix[i].append(graph.matrix[v][i])
 
-
 def obedin(graph1,graph2):
     newVertexex = arrOr(graph1.vertexes,graph2.vertexes)
     newSize = len(newVertexex)
@@ -182,7 +181,7 @@ def peresechenie(graph1,graph2):
     else:
         return None
 
-def xorGraphs(graph1,graph2):
+def koltsevaya_summa(graph1,graph2):
     newVertexex = arrOr(graph1.vertexes, graph2.vertexes)
     newSize = len(newVertexex)
 
@@ -235,3 +234,53 @@ def xorGraphs(graph1,graph2):
 
     else:
         return None
+
+def smezhnost(graph,V,U):
+    i = graph.vertexes.index(U)
+    j = graph.vertexes.index(V)
+
+    return graph.matrix[i][j]
+
+def decart_graph_prod(graph1,graph2):
+    new_vertexes=cart_prod(graph1.vertexes, graph2.vertexes)
+
+    size1 = len(graph1.vertexes)
+    size2 = len(graph2.vertexes)
+
+    new_size = len(new_vertexes)
+    new_range = range(new_size)
+
+    new_matrix = [[0 for i in new_range] for i in new_range]
+
+    new_graph = mtrxGraph(new_matrix,new_vertexes)
+
+    condition = False
+    for i in new_range:
+        new_vrtx1=new_graph.vertexes[i]
+
+        u = new_vrtx1[:new_vrtx1.index('&')]
+        U = new_vrtx1[new_vrtx1.index('&')+1:]
+
+        for j in new_range:
+            new_vrtx2=new_graph.vertexes[j]
+
+            v = new_vrtx2[:new_vrtx2.index('&')]
+            V = new_vrtx2[new_vrtx2.index('&') + 1]
+
+            if u==v:
+                if smezhnost(graph2,U,V):
+                    condition=True
+                else:
+                    condition = False
+
+            elif U==V:
+                if smezhnost(graph1,u,v):
+                    condition = True
+                else:
+                    condition = False
+
+            if condition:
+                new_graph.matrix[i][j] = 1
+                condition = False
+
+    return new_graph

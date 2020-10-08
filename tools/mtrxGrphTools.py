@@ -5,7 +5,7 @@ def printMatrixGraph(graph):
 
     print('|v{:>2s}|{:<3s}|'.format("",""), end='')
     for i in graph.vertexes:
-        print("{:<3d}|".format(i), end='')
+        print("{:<3s}|".format(str(i)), end='')
     print('', end="\n|{:<3s}|".format(""))
 
     for i in rng:
@@ -13,22 +13,22 @@ def printMatrixGraph(graph):
     print('{:<3s}|'.format(""), end='\n')
 
     for i in rng:
-        print("|{:>3d}|{:<3s}".format(graph.vertexes[i],""), end='')
+        print("|{:>3s}|{:<3s}".format(str(graph.vertexes[i]),""), end='')
         for j in rng:
             print("|{:<3d}".format(graph.matrix[i][j]),end='')
         print('|',end='\n')
     print('', end='\n')
 
-# def printGraph(graph):
-#     rng=range(len(graph.matrix))
-#
-#     print(graph.vertexes)
-#
-#     for i in rng:
-#         for j in rng:
-#             print("%d,"%(graph.matrix[i][j]),end='')
-#         print('',end='\n')
-#     print('', end='\n')
+def printMatrix(graph):
+    rng=range(len(graph.matrix))
+
+    print(graph.vertexes)
+
+    for i in rng:
+        for j in rng:
+            print("%d,"%(graph.matrix[i][j]),end='')
+        print('',end='\n')
+    print('', end='\n')
 
 def randomVertice(chance):
     a=random.choice(list(range(100)))
@@ -40,14 +40,21 @@ def randomVertice(chance):
 
     return res
 
-def makeVertexes(size):
+def makeVertexes(size,cnvrt_to_chars):
     rng=list(range(1,size*2+1))
 
     names=[]
-    for i in range(size):
-        name=random.choice(rng)
-        del rng[rng.index(name)]
-        names.append(name)
+    if (not cnvrt_to_chars):
+        for i in range(size):
+            name=random.choice(rng)
+            del rng[rng.index(name)]
+            names.append(name)
+    else:
+        for i in range(size):
+            nextNum=random.choice(rng)
+            name=chr(97 + nextNum)
+            del rng[rng.index(nextNum)]
+            names.append(name)
 
     names.sort()
 
@@ -98,3 +105,15 @@ def arrXor(vrtxs1, vrtxs2):
             newVrtxs.append(vrtxs2[i])
 
     return newVrtxs
+
+def cart_prod(arr1, arr2):
+    size1 = len(arr1)
+    size2 = len(arr2)
+
+    prod=[]
+
+    for i in range(size1):
+        for j in range(size2):
+            prod.append("{:s}&{:s}".format(str(arr1[i]), str(arr2[j])))
+
+    return prod
