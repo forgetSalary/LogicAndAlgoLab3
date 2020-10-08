@@ -1,0 +1,30 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+D:/CPrctc/Graphs/matrix/matrix.h
+stdlib.h
+D:/CPrctc/Graphs/matrix/stdlib.h
+operations/remvrtx.h
+D:/CPrctc/Graphs/matrix/operations/remvrtx.h
+
+D:/CPrctc/Graphs/matrix/mtrxgrph.c
+mtrxgrph.h
+D:/CPrctc/Graphs/matrix/mtrxgrph.h
+
+D:/CPrctc/Graphs/matrix/mtrxgrph.h
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+matrix.h
+D:/CPrctc/Graphs/matrix/matrix.h
+
+D:/CPrctc/Graphs/matrix/operations/remvrtx.h
+
